@@ -3,7 +3,7 @@ let pencil = canvas.getContext("2d");
 
 import { Star } from "./star.js";
 
-let mySpecialStar = new Star(pencil);
+let mySpecialStar = new Star(canvas, pencil);
 mySpecialStar.draw();
 
 let stars = [
