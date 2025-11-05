@@ -3,28 +3,43 @@ let pencil = canvas.getContext("2d");
 
 import { Star } from "./star.js";
 
-let mySpecialStar = new Star(canvas, pencil);
-mySpecialStar.draw();
+//add all stars to array
+let stars = [];
 
-let stars = [
-    mySpecialStar
-];
+let howManyStars = 100;
+
+
+for (let i = 0; i < howManyStars; i++) {
+    let newStar = new Star(canvas, pencil);
+    stars.push(newStar)
+}
+
+function drawSpace() {
+
+    pencil.fillStyle = 'black';
+    //draw dilled rectangle
+    pencil.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+//erase canvas
+function clearScreen() {
+     pencil.clearRect(0, 0, canvas.clientWidth, canvas.height);
+}
 
 function gameLoop() {
 
-    //erase canvas
-    pencil.clearRect(0, 0, canvas.clientWidth, canvas.height)
-    //draw background
-    //draw stars
-    //move stars
-    for(let i = 0; i < stars.length; i++) {
+   
+    clearScreen();
+    drawSpace();
+    for (let i = 0; i < stars.length; i++) {
         stars[i].move();
         stars[i].draw();
+        stars[i].tryToRecycle();
     }
-    //recycle stars / restart stars
+    
 
 
 
 }
 
-setInterval(gameLoop, 50);
+setInterval(gameLoop, 10);
